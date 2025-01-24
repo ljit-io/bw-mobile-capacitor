@@ -1,0 +1,8 @@
+{
+  "appId": "bw.base.root",
+  "appName": "bw",
+  "webDir": "www",
+  "server": {
+    "url": "https://aiansi.com"
+  }
+}
