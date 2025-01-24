@@ -14,7 +14,12 @@ def capacitor_pods
 
 end
 
-target 'App' do
+target 'BW1' do
+  capacitor_pods
+  # Add your Pods here
+end
+
+target 'BW2' do
   capacitor_pods
   # Add your Pods here
 end

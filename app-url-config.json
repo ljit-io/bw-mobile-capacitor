@@ -1,0 +1,24 @@
+{
+	"bw1": {
+		"appId": "bw.base.root1",
+		"appName": "bw1",
+		"webDir": "www",
+		"server": {
+		  "url": "https://aiansi.com"
+		},
+		"ios": {
+		  "scheme": "BW1"
+		}
+	},
+	"bw2": {
+		"appId": "bw.base.root2",
+		"appName": "bw2",
+		"webDir": "www",
+		"server": {
+		  "url": "https://joseso.com"
+		},
+		"ios": {
+			"scheme": "BW2"
+		}
+	}
+}
