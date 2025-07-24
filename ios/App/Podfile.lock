@@ -1,22 +1,28 @@
 PODS:
-  - Capacitor (6.2.0):
+  - Capacitor (6.2.1):
     - CapacitorCordova
-  - CapacitorCordova (6.2.0)
+  - CapacitorCordova (6.2.1)
+  - CapacitorPushNotifications (6.0.4):
+    - Capacitor
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorPushNotifications (from `../../node_modules/@capacitor/push-notifications`)"
 
 EXTERNAL SOURCES:
   Capacitor:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
+  CapacitorPushNotifications:
+    :path: "../../node_modules/@capacitor/push-notifications"
 
 SPEC CHECKSUMS:
-  Capacitor: 1f3c7b9802d958cd8c4eb63895fff85dff2e1eea
-  CapacitorCordova: b33e7f4aa4ed105dd43283acdd940964374a87d9
+  Capacitor: 1e0d0e7330dea9f983b50da737d8918abcf273f8
+  CapacitorCordova: 8d93e14982f440181be7304aa9559ca631d77fff
+  CapacitorPushNotifications: 1fc22ae360214a0ac0625c348d3aea217085163d
 
-PODFILE CHECKSUM: c02a47bcd72fbdec68d21cc8ce245940a081968c
+PODFILE CHECKSUM: e6af4d827bdda0a40f913e335e0078d489ad4bd4
 
 COCOAPODS: 1.15.2

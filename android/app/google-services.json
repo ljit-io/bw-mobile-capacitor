@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "762267198327",
+    "project_id": "bw-android-push-notification",
+    "storage_bucket": "bw-android-push-notification.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762267198327:android:9298ede7fe5eaee8c27772",
+        "android_client_info": {
+          "package_name": "bw.base.root1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyCXauIVqc0enDEozXF7KiBz0guijo9YY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
