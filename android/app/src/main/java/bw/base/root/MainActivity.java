@@ -46,6 +46,16 @@ public class MainActivity extends BridgeActivity {
                     openOAuthInCustomTab(url);
                     return true; // 阻止 WebView 載入
                 }
+
+                Uri uri = Uri.parse(url);
+                String scheme = uri.getScheme();
+                String serverUrl = getString(R.string.server_url);
+
+                // 如果有呼叫 deep link
+                if (scheme != null && scheme.equals(serverUrl)) {
+                    return true; // 不要讓 WebView 嘗試載入
+                }
+
                 return false; // 繼續 WebView 正常流程
             }
         });
@@ -60,12 +70,23 @@ public class MainActivity extends BridgeActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+
         Uri data = intent.getData();
+        if (data != null) {
+            String scheme = data.getScheme();
+            String host   = data.getHost();
+            String query = data.getQuery();
 
-        String serverUrl = bridge.getServerUrl();
+            String serverUrl = getString(R.string.server_url);
 
-        if (data != null && serverUrl != null && data.toString().startsWith(serverUrl)) {
-            bridge.getWebView().loadUrl(data.toString());
+            if (scheme != null && scheme.equals(serverUrl)) {
+                String targetUrl = "https://" + serverUrl + "/callback?" + query;
+                bridge.getWebView().loadUrl(targetUrl);
+            }
+
+            if (host != null && host.equals(serverUrl)) {
+                bridge.getWebView().loadUrl(data.toString());
+            }
         }
     }
 }
