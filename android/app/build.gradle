@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'
 
 android {
     namespace "bw.base.root"
@@ -31,8 +31,8 @@ android {
     productFlavors {
         bw1 {
             dimension "product"
-            applicationId = "bw.base.root1"
-            resValue "string", "app_name", "BW1"
+            applicationId = "com.yoyo.bet"
+            resValue "string", "app_name", "Yobet"
             resValue "string", "server_url", "aiansi.com"
             manifestPlaceholders = [
                     appIcon: "@mipmap/ic_launcher"
