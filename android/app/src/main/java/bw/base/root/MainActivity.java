@@ -22,7 +22,7 @@ public class MainActivity extends BridgeActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        requestNotificationPermission();
+//        requestNotificationPermission();
     }
 
     private void requestNotificationPermission() {
@@ -59,6 +59,7 @@ public class MainActivity extends BridgeActivity {
                 return false; // 繼續 WebView 正常流程
             }
         });
+        webView.addJavascriptInterface(new JsInterface(), "jsBridge");
     }
 
     private void openOAuthInCustomTab(String url) {
