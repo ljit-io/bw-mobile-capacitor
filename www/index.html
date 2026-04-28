@@ -1,12 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Capacitor App</title>
+  <title>Loading…</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #111;
+      color: #eee;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .center {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid rgba(255,255,255,0.2);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .msg { font-size: 14px; opacity: 0.85; }
+    .err { font-size: 15px; line-height: 1.5; }
+    button {
+      padding: 10px 20px;
+      font-size: 15px;
+      border: 1px solid #888;
+      border-radius: 6px;
+      background: transparent;
+      color: #eee;
+      cursor: pointer;
+    }
+    .hidden { display: none; }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Capacitor!</h1>
+  <div id="loading" class="center">
+    <div class="spinner"></div>
+  </div>
+  <div id="error" class="center hidden">
+    <div class="err">Não foi possível conectar ao servidor. Verifique sua conexão com a internet e tente novamente.</div>
+    <button onclick="location.reload()">Tentar novamente</button>
+  </div>
 
+  <script>
+    (async function () {
+      const PROBE_TIMEOUT_MS = 2500;
+
+      function showError() {
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('error').classList.remove('hidden');
+      }
+
+      async function probe(url) {
+        try {
+          await fetch(url, {
+            method: 'HEAD',
+            mode: 'no-cors',
+            cache: 'no-store',
+            signal: AbortSignal.timeout(PROBE_TIMEOUT_MS)
+          });
+          return true;
+        } catch (_) {
+          return false;
+        }
+      }
+
+      let urls = [];
+      try {
+        const res = await fetch('./url-config.json', { cache: 'no-store' });
+        const cfg = await res.json();
+        urls = Array.isArray(cfg.urls) ? cfg.urls : [];
+      } catch (e) {
+        console.error('[launcher] failed to read url-config.json', e);
+      }
+
+      if (urls.length === 0) {
+        showError();
+        return;
+      }
+
+      // Fisher-Yates shuffle，每次啟動隨機順序
+      for (let i = urls.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [urls[i], urls[j]] = [urls[j], urls[i]];
+      }
+      console.log('[launcher] shuffled order:', urls);
+
+      for (const url of urls) {
+        console.log('[launcher] probing', url);
+        if (await probe(url)) {
+          console.log('[launcher] picked', url);
+          try {
+            if (window.jsBridge && typeof window.jsBridge.setActiveServerUrl === 'function') {
+              window.jsBridge.setActiveServerUrl(url);
+            }
+          } catch (e) {
+            console.warn('[launcher] setActiveServerUrl failed', e);
+          }
+          window.location.replace(url);
+          return;
+        }
+      }
+
+      console.error('[launcher] all urls unreachable');
+      showError();
+    })();
+  </script>
 </body>
 </html>

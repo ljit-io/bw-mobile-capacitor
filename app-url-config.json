@@ -3,28 +3,30 @@
 		"appId": "com.yoyo.bet",
 		"appName": "Yobet",
 		"webDir": "www",
-		"server": {
-		  "url": "https://aiansi.com"
-		},
 		"ios": {
 		  "scheme": "BW1"
 		},
 		"android": {
 			"flavor": "bw1"
-		}
+		},
+		"urls": [
+			"https://g59x0yo.com?channelId=29",
+			"https://yo00x9h.com?channelId=30",
+			"https://x55yobet0y.com?channelId=31"
+		]
 	},
 	"bw2": {
 		"appId": "bw.base.root2",
 		"appName": "bw2",
 		"webDir": "www",
-		"server": {
-		  "url": "https://joseso.com"
-		},
 		"ios": {
 			"scheme": "BW2"
 		},
 		"android": {
 			"flavor": "bw2"
-		}
+		},
+		"urls": [
+			"https://joseso.com"
+		]
 	}
 }
